@@ -24,7 +24,7 @@ const Search = () => {
   const { historicalByCountry } = config;
   const inputEl = useRef(null);
 
-  const getHistoricalByCountry = async value => {  
+  const getHistoricalByCountry = async (value) => {
     try {
       const response = await axios.get(`${historicalByCountry}${value}`);
       const { data, status } = response;
@@ -53,15 +53,15 @@ const Search = () => {
     setErrorMessage('');
     setHasError(false);
     setInputValue(e.target.value);
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     getHistoricalByCountry(inputValue);
     setInputValue('');
     inputEl.current.focus();
-  }
-
+  };
+  //
   return (
     <S.SearchContainer>
       <h2>Cases by Country:</h2>
@@ -92,10 +92,12 @@ const Search = () => {
               </p>
               <p className="active-cases">
                 Active Cases:{' '}
-                {country.timeline && formatNumeral(
-                  country.timeline.cases[getTheLastDay()] -
-                    country.timeline.deaths[getTheLastDay()] -
-                    country.timeline.recovered[getTheLastDay()])}
+                {country.timeline &&
+                  formatNumeral(
+                    country.timeline.cases[getTheLastDay()] -
+                      country.timeline.deaths[getTheLastDay()] -
+                      country.timeline.recovered[getTheLastDay()]
+                  )}
               </p>
               <p className="deaths">
                 Deaths:{' '}
@@ -118,9 +120,25 @@ const Search = () => {
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Area type="monotone" dataKey="cases" stroke="#ef3b2c" fill="#ef3b2c" activeDot={{ r: 8 }} />
-                  <Area type="monotone" dataKey="deaths" stroke="#474747" fill="#474747" />
-                  <Area type="monotone" dataKey="recovered" stroke="#198700" fill="#198700" />
+                  <Area
+                    type="monotone"
+                    dataKey="cases"
+                    stroke="#ef3b2c"
+                    fill="#ef3b2c"
+                    activeDot={{ r: 8 }}
+                  />
+                  <Area
+                    type="monotone"
+                    dataKey="deaths"
+                    stroke="#474747"
+                    fill="#474747"
+                  />
+                  <Area
+                    type="monotone"
+                    dataKey="recovered"
+                    stroke="#198700"
+                    fill="#198700"
+                  />
                 </AreaChart>
               </ResponsiveContainer>
             </S.SearchResultChartContainer>
