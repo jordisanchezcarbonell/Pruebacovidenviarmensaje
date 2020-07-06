@@ -61,7 +61,7 @@ const Search = () => {
     setInputValue('');
     inputEl.current.focus();
   };
-  //
+  //**/** */ */
   return (
     <S.SearchContainer>
       <h2>Cases by Country:</h2>
